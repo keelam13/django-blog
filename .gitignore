@@ -1,1 +1,7 @@
 .venv/
+env.py
+__pycache__/
+*.py[cod]
+mode_modules/
+.github/
+cloudinay_python.txt
