@@ -16,6 +16,17 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name='blog_posts'
         )
     status = models.IntegerField(choices=STATUS, default=0)
+    excerpt = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='commenter')
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
