@@ -5,3 +5,4 @@ __pycache__/
 mode_modules/
 .github/
 cloudinay_python.txt
+blog/fixtures/
