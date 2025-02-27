@@ -7,8 +7,13 @@ STATUS = (
     (1, "Publish")
 )
 
+
 # Create your models here.
 class Post(models.Model):
+    """
+    Stores a single blog post entry related to :model: 'auth.User'
+    and :model: `blog.Post`.
+    """
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     content = models.TextField()
@@ -27,8 +32,16 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title} | written by {self.author}"
 
+
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    """
+    Stores a single blog comment entry related to :model: 'auth.User'.
+    """
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments'
+        )
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='commenter')
     body = models.TextField()
@@ -37,6 +50,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created_on']
-    
+
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
